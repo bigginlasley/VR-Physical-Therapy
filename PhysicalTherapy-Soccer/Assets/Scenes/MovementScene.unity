@@ -2557,7 +2557,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  animator: {fileID: 0}
+  animator: {fileID: 95341100}
 --- !u!143 &1229393816
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2608,7 +2608,8 @@ MonoBehaviour:
   m_EnableTurnLeftRight: 1
   m_EnableTurnAround: 1
   m_TurnUsage: 0
-  m_Controllers: []
+  m_Controllers:
+  - {fileID: 0}
   m_DeadZone: 0.75
 --- !u!43 &1328483398
 Mesh:

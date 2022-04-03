@@ -18,14 +18,16 @@ public class Navigation : MonoBehaviour
     private float fallingSpeed;
 
     public LayerMask groundLayer;
-    // GameObject user = GameObject.FindGameObjectWithTag("Player");
+    GameObject user = GameObject.FindGameObjectWithTag("Player");
     public Animator animator;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         character = GetComponent<CharacterController>();
         rig = GetComponent<XROrigin>();
+        //anim = user.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,12 +35,18 @@ public class Navigation : MonoBehaviour
     {
         InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
+
     }
 
     private void FixedUpdate()
     {
         Quaternion headYaw = Quaternion.Euler(0, rig.Camera.transform.eulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && direction == Vector3.zero)
+        {
+            StartCoroutine("Pass");
+        }
 
         //Right circle trigger
         if (Input.GetKey(KeyCode.JoystickButton15))
@@ -69,18 +77,15 @@ public class Navigation : MonoBehaviour
         }
 
 
-        //if(direction != Vector3.zero)
-        //{
-         //   animator.SetBool("isMoving", true);
-        //}
-        //else
-        //{
-        //    animator.SetBool("isMoving", false);
-        //}
-
-
+        if(direction != Vector3.zero)
+        {
+           animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
         character.Move(Vector3.up * fallingSpeed * Time.fixedDeltaTime);
-
 
     }
 
@@ -90,5 +95,11 @@ public class Navigation : MonoBehaviour
         float length = character.center.y + 0.01f;
         bool hasHit = Physics.SphereCast(rayStart, character.radius, Vector3.down, out RaycastHit HitInfo, length, groundLayer);
         return hasHit;
+    }
+
+    IEnumerator Pass()
+    {
+        animator.Play("Soccer Pass");
+        yield return new WaitForSeconds(1);
     }
 }
