@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.physicaltherapysoccer.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\dhan\\Desktop\\JAD\\VR-Physical-Therapy\\PhysicalTherapy-Soccer\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\vizus-1\\Desktop\\VR-Physical-Therapy\\PhysicalTherapy-Soccer\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "PhysicalTherapy-Soccer [Testing]"
