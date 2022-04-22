@@ -18,7 +18,6 @@ public class Navigation : MonoBehaviour
     private float fallingSpeed;
 
     public LayerMask groundLayer;
-    GameObject user = GameObject.FindGameObjectWithTag("Player");
     public Animator animator;
     private Animator anim;
 
@@ -27,7 +26,6 @@ public class Navigation : MonoBehaviour
     {
         character = GetComponent<CharacterController>();
         rig = GetComponent<XROrigin>();
-        //anim = user.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -35,7 +33,6 @@ public class Navigation : MonoBehaviour
     {
         InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
-
     }
 
     private void FixedUpdate()
