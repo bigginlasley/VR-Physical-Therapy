@@ -5,20 +5,22 @@ using System;
 
 public class ReportKneeAngle : MonoBehaviour
 {
-    public GameObject thigh;
-    public GameObject knee;
-    public GameObject calf;
+    private GameObject thigh;
+    private GameObject knee;
+    private GameObject calf;
 
     public float maxAngle;
     public float minAngle;
-    
+    public float currentAngle;
 
+    public bool logAngle;
+    
     // Start is called before the first frame update
     void Start()
     {
-        this.thigh = GameObject.Find("Thigh");
-        this.knee = GameObject.Find("Knee");
-        this.calf = GameObject.Find("Calf");
+        this.thigh = GameObject.Find("ThighTracker");
+        this.knee = GameObject.Find("KneeTracker");
+        this.calf = GameObject.Find("CalfTracker");
 
         float initialAngle = this.GetAngle();
         this.maxAngle = 0f;
@@ -28,19 +30,22 @@ public class ReportKneeAngle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {       
-        float angle = this.GetAngle();
+        this.currentAngle = this.GetAngle();
 
-        if (angle > this.maxAngle)
+        if (this.currentAngle > this.maxAngle)
         {
-            this.maxAngle = angle;
+            this.maxAngle = this.currentAngle;
         }
-        if (angle < this.minAngle)
+        if (this.currentAngle < this.minAngle)
         {
-            this.minAngle = angle;
+            this.minAngle = this.currentAngle;
         }
 
-        Debug.Log(String.Format("Max angle: {0}\nMin angle: {1}", this.maxAngle, this.minAngle));
-        Debug.Log(String.Format("Current angle: {0}", angle));
+        if (logAngle)
+        {
+            Debug.Log(String.Format("Max angle: {0}\nMin angle: {1}", this.maxAngle, this.minAngle));
+            Debug.Log(String.Format("Current angle: {0}", this.currentAngle));
+        }
     }
 
     private float GetAngle()
