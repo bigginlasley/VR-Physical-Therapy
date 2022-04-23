@@ -14,19 +14,23 @@ public class launch_ball : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.Space)) {
+        // Debug.Log("I'm working");
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
             Debug.Log("Space bar pressed");
             GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sphere.transform.position = new Vector3(0, 1.5f, 0);
+            sphere.transform.position = this.transform.position;
+            sphere.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            // sphere.transform.position = new Vector3(0, 1.5f, 0);
+
             Rigidbody gameObjectsRigidBody = sphere.AddComponent<Rigidbody>();
             gameObjectsRigidBody.mass = 1;
             gameObjectsRigidBody.AddForce(Vector3.back * 100, ForceMode.VelocityChange);
             Vector3 bar = transform.position;
-            Debug.Log(bar);
+            PlayerPrefs.SetInt("max", 69);
+            // Debug.Log(bar);
             // gameObjectsRigidBody.velocity = transform.TransformDirection(Vector3.foward * 10);
         }
-
-
 
     }
 }
