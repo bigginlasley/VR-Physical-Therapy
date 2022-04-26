@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scored : MonoBehaviour
+public class MissedGoal : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class scored : MonoBehaviour
     {
         // if(GetComponet<Collider> ().GetType () == typeof(BoxCollider))
         
-        Debug.Log("GOAL");
+        Debug.Log("You're bad");
 
         Destroy(other.gameObject);
     }
