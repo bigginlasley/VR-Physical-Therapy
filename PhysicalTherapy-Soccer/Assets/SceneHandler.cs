@@ -10,6 +10,10 @@ public class SceneHandler : MonoBehaviour
 {
     public SteamVR_LaserPointer laserPointer;
 
+    public GameObject MainMenu;
+    public GameObject CalibrationMenu;
+    public GameObject PlayMenu;
+
     void Awake()
     {
         laserPointer.PointerIn += PointerInside;
@@ -17,62 +21,50 @@ public class SceneHandler : MonoBehaviour
         laserPointer.PointerClick += PointerClick;
     }
 
+    void Start() {
+        // Start with the MainMenu frame visible
+        MainMenu.SetActive(true);
+        CalibrationMenu.SetActive(false);
+        PlayMenu.SetActive(false);    
+    }
+
     public void PointerClick(object sender, PointerEventArgs e)
     {
-        if (e.target.name == "StartButton")
+        // Enter calibration frame
+        if (e.target.name == "CalibrateButton")
         {
-            Debug.Log("Start Button was clicked");
-        } else if (e.target.name == "Button")
-        {
-            Debug.Log("Button was clicked");
+            Debug.Log("Entered Calibration");
+            MainMenu.SetActive(false);
+            CalibrationMenu.SetActive(true);
         }
-
-         if (e.target.name == "ExitButton")
+        // Exit calibration frame
+        else if (e.target.name == "LeaveCalibrationButton")
         {
-            Debug.Log("Exit Button was clicked");
-        } else if (e.target.name == "Button")
+            Debug.Log("Exited Calibration");
+            CalibrationMenu.SetActive(false);
+            MainMenu.SetActive(true);
+        }
+        // Enter play frame
+        else if (e.target.name == "PlayButton")
         {
-            Debug.Log("Button was clicked");
+            Debug.Log("Entered Game");
+            MainMenu.SetActive(false);
+            PlayMenu.SetActive(true);
+        }
+        // Exit play frame
+        else if (e.target.name == "LeavePlayButton")
+        {
+            Debug.Log("Exited Game");
+            PlayMenu.SetActive(false);
+            MainMenu.SetActive(true);
         }
     }
 
     public void PointerInside(object sender, PointerEventArgs e)
     {
-        // if (e.target.name == "StartButton")
-        // {
-        //     Debug.Log("Start Button was entered");
-        // }
-        // else if (e.target.name == "Button")
-        // {
-        //     Debug.Log("Button was entered");
-        // }
-            
-        //     if (e.target.name == "ExitButton")
-        // {
-        //     Debug.Log("Exit Button was clicked");
-        // } else if (e.target.name == "Button")
-        // {
-        //     Debug.Log("Button was clicked");
-        // }
     }
 
     public void PointerOutside(object sender, PointerEventArgs e)
     {
-        // if (e.target.name == "StartButton")
-        // {
-        //     Debug.Log("Start Button was exited");
-        // }
-        // else if (e.target.name == "Button")
-        // {
-        //     Debug.Log("Button was exited");
-        // }
-
-        // if (e.target.name == "ExitButton")
-        // {
-        //     Debug.Log("Exit Button was clicked");
-        // } else if (e.target.name == "Button")
-        // {
-        //     Debug.Log("Button was clicked");
-        // }
     }
 }
