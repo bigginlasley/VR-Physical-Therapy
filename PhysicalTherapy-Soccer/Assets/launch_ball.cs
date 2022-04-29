@@ -8,7 +8,7 @@ using Valve.VR;
 public class launch_ball : MonoBehaviour
 {
     public SteamVR_Action_Boolean triggerSqueezed;
-    public SteamVR_Action_Boolean buttonPressed; // TODO: Remove testing
+    // public SteamVR_Action_Boolean buttonPressed; // TODO: Remove testing
     public SteamVR_Input_Sources handType;
 
     public GameObject leg;
@@ -29,8 +29,8 @@ public class launch_ball : MonoBehaviour
     {
         triggerSqueezed.AddOnStateUpListener(TriggerUp, handType);
         triggerSqueezed.AddOnStateDownListener(TriggerDown, handType);
-        buttonPressed.AddOnStateUpListener(ButtonUp, handType);
-        buttonPressed.AddOnStateDownListener(ButtonDown, handType);
+        // buttonPressed.AddOnStateUpListener(ButtonUp, handType);
+        // buttonPressed.AddOnStateDownListener(ButtonDown, handType);
         this.kneeAngleScript = leg.GetComponent<ReportKneeAngle>();
     }
 
@@ -70,28 +70,39 @@ public class launch_ball : MonoBehaviour
     }
 
     public void TriggerUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
-        Debug.Log("Trigger released");
+        Debug.Log("launch_ball: Trigger released");
         this.isTriggerDown = false;
         LaunchBall();
     }
 
     public void TriggerDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
-        Debug.Log("Trigger pressed");
+        Debug.Log("launch_ball: Trigger pressed");
         this.isTriggerDown = true;
         this.minAngle = 180f;
         this.maxAngle = 0f;
     }
 
-    public void ButtonUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
-        this.isButtonDown = false;
-        Debug.Log("Finished calibrating");
-    }
+    // public void ButtonUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
+    //     this.isButtonDown = false;
+    //     Debug.Log("Finished calibrating");
+    // }
 
-    public void ButtonDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
-        Debug.Log("Calibrating...");
+    // public void ButtonDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
+    //     Debug.Log("Calibrating...");
+    //     this.isButtonDown = true;
+    //     this.minCalibration = 180f;
+    //     this.maxCalibration = 0f;
+    // }
+
+    public void EnteredCalibration() {
+        Debug.Log("launch_ball: Calibrating...");
         this.isButtonDown = true;
         this.minCalibration = 180f;
         this.maxCalibration = 0f;
+    }
+    public void ExitedCalibration() {
+        this.isButtonDown = false;
+        Debug.Log(string.Format("launch_ball: Finished calibrating\nMaxAngle: {0}\nMinAngle: {1}", this.maxAngle, this.minAngle));
     }
 
     // private void LaunchBall() {
