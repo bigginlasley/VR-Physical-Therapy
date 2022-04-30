@@ -8,6 +8,8 @@ public class scored : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // StartCoroutine(idle());
+
     }
 
     // Update is called once per frame
@@ -19,10 +21,28 @@ public class scored : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // if(GetComponet<Collider> ().GetType () == typeof(BoxCollider))
-        animator.SetBool("isScored", true);
+        StartCoroutine(victory());
         Debug.Log("GOAL");
 
         Destroy(other.gameObject);
-        animator.SetBool("isScored", false);
+        // animator.SetBool("isScored", false);
+        // StartCoroutine(idle());
     }
+    
+    IEnumerator victory()
+    {
+        Debug.Log("enum");
+        animator.Play("Cheering");
+        yield return new WaitForSeconds(6);
+        animator.Play("Breathing Idle");
+        yield return new WaitForSeconds(2);
+    }
+
+    IEnumerator idle()
+    {
+        animator.Play("Idle");
+        yield return new WaitForSeconds(2);
+    }
+
+
 }
