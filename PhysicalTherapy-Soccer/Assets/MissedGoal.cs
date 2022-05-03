@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using Valve.VR.Extras;
 
 public class MissedGoal : MonoBehaviour
 {
     public Animator animator;
     public Animator animator1;
+    public GameObject encMessage;
+    public GameObject blank;
     // Start is called before the first frame update
     void Start()
     {
-        // animator1 = GetComponent<Animator>();
+        blank.SetActive(true);
+        encMessage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,10 +41,14 @@ public class MissedGoal : MonoBehaviour
         Debug.Log("enum");
         animator1.Play("Fail");
         animator.Play("soccer fail");
-        yield return new WaitForSeconds(6);
+        blank.SetActive(false);
+        encMessage.SetActive(true);
+        yield return new WaitForSeconds(3);
+        blank.SetActive(true);
+        encMessage.SetActive(false);
         animator1.Play("Breathing Idle");
         animator.Play("soccer idle");
-        yield return new WaitForSeconds(2);
+        // yield return new WaitForSeconds(2);
     }
 }
 
