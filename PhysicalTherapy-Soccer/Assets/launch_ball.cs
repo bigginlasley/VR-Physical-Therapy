@@ -8,8 +8,9 @@ using Valve.VR;
 public class launch_ball : MonoBehaviour
 {
     public SteamVR_Action_Boolean triggerSqueezed;
-    // public SteamVR_Action_Boolean buttonPressed; // TODO: Remove testing
     public SteamVR_Input_Sources handType;
+
+    public GameObject ball;
 
     public GameObject leg;
     private ReportKneeAngle kneeAngleScript;
@@ -82,18 +83,6 @@ public class launch_ball : MonoBehaviour
         this.maxAngle = 0f;
     }
 
-    // public void ButtonUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
-    //     this.isButtonDown = false;
-    //     Debug.Log("Finished calibrating");
-    // }
-
-    // public void ButtonDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
-    //     Debug.Log("Calibrating...");
-    //     this.isButtonDown = true;
-    //     this.minCalibration = 180f;
-    //     this.maxCalibration = 0f;
-    // }
-
     public void EnteredCalibration() {
         Debug.Log("launch_ball: Calibrating...");
         this.isButtonDown = true;
@@ -105,22 +94,6 @@ public class launch_ball : MonoBehaviour
         Debug.Log(string.Format("launch_ball: Finished calibrating\nMaxAngle: {0}\nMinAngle: {1}", this.maxAngle, this.minAngle));
     }
 
-    // private void LaunchBall() {
-    //     Debug.Log(string.Format("Max angle: {0}\nMin angle: {1}", this.maxAngle, this.minAngle));
-
-    //     GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-    //     sphere.transform.position = this.transform.position;
-    //     sphere.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-    //     // sphere.transform.position = new Vector3(0, 1.5f, 0);
-
-    //     Rigidbody gameObjectsRigidBody = sphere.AddComponent<Rigidbody>();
-    //     gameObjectsRigidBody.mass = 1;
-    //     gameObjectsRigidBody.AddForce(Vector3.back * 100, ForceMode.VelocityChange);
-    //     Vector3 bar = transform.position;
-    //     PlayerPrefs.SetInt("max", 69);
-    //     // Debug.Log(bar);
-    //     // gameObjectsRigidBody.velocity = transform.TransformDirection(Vector3.foward * 10);
-    // }
 
     private void LaunchBall() {
         Debug.Log(string.Format("Max angle: {0}\nMin angle: {1}", this.maxAngle, this.minAngle));
@@ -130,9 +103,10 @@ public class launch_ball : MonoBehaviour
 
         Debug.Log(string.Format("Shot accuracy: {0}\nShot power: {1}", shotAccuracy * 100, shotPower * 100));
 
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        GameObject sphere = Instantiate(ball);
         sphere.transform.position = this.transform.position;
-        sphere.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        // sphere.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         // sphere.transform.position = new Vector3(0, 1.5f, 0);
 
         Rigidbody gameObjectsRigidBody = sphere.AddComponent<Rigidbody>();
@@ -154,7 +128,5 @@ public class launch_ball : MonoBehaviour
         gameObjectsRigidBody.AddForce(Vector3.right * 10 * (1 - shotAccuracy) * leftRight, ForceMode.VelocityChange);
 
         Vector3 bar = transform.position;
-        // Debug.Log(bar);
-        // gameObjectsRigidBody.velocity = transform.TransformDirection(Vector3.foward * 10);
     }
 }
