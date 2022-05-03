@@ -5,6 +5,7 @@ using UnityEngine;
 public class scored : MonoBehaviour
 {
     public Animator animator;
+    public Animator animator2;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,16 +34,11 @@ public class scored : MonoBehaviour
     {
         Debug.Log("enum");
         animator.Play("Cheering");
+        animator2.Play("soccer cheering");
         yield return new WaitForSeconds(6);
         animator.Play("Breathing Idle");
+        animator2.Play("soccer idle");
         yield return new WaitForSeconds(2);
     }
-
-    IEnumerator idle()
-    {
-        animator.Play("Idle");
-        yield return new WaitForSeconds(2);
-    }
-
 
 }
