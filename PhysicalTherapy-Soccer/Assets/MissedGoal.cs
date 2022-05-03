@@ -27,13 +27,10 @@ public class MissedGoal : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // if(GetComponet<Collider> ().GetType () == typeof(BoxCollider))
         StartCoroutine(Fail());
         Debug.Log("You're bad");
 
         Destroy(other.gameObject);
-        // animator.SetBool("isScored", false);
-        // StartCoroutine(idle());
     }
     
     IEnumerator Fail()
@@ -48,7 +45,6 @@ public class MissedGoal : MonoBehaviour
         encMessage.SetActive(false);
         animator1.Play("Breathing Idle");
         animator.Play("soccer idle");
-        // yield return new WaitForSeconds(2);
     }
 }
 

@@ -12,6 +12,8 @@ public class launch_ball : MonoBehaviour
 
     public GameObject ball;
 
+    public GameObject PlayMenu;
+
     public GameObject leg;
     private ReportKneeAngle kneeAngleScript;
 
@@ -19,7 +21,7 @@ public class launch_ball : MonoBehaviour
     private float maxAngle;
     private bool isTriggerDown;
 
-    private float minCalibration; // TODO: Remove testing
+    private float minCalibration;
     private float maxCalibration;
     private bool isButtonDown;
 
@@ -30,8 +32,6 @@ public class launch_ball : MonoBehaviour
     {
         triggerSqueezed.AddOnStateUpListener(TriggerUp, handType);
         triggerSqueezed.AddOnStateDownListener(TriggerDown, handType);
-        // buttonPressed.AddOnStateUpListener(ButtonUp, handType);
-        // buttonPressed.AddOnStateDownListener(ButtonDown, handType);
         this.kneeAngleScript = leg.GetComponent<ReportKneeAngle>();
     }
 
@@ -63,17 +63,15 @@ public class launch_ball : MonoBehaviour
                 minCalibration = currentAngle;
             }
         }
-
-        // if (Input.GetKeyDown(KeyCode.Space)) {
-        //     Debug.Log("Space bar pressed");
-        //     LaunchBall();
-        // }
     }
 
     public void TriggerUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
         Debug.Log("launch_ball: Trigger released");
         this.isTriggerDown = false;
-        LaunchBall();
+        if(PlayMenu.activeSelf)
+        {
+            LaunchBall();
+        }
     }
 
     public void TriggerDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) {
@@ -103,11 +101,9 @@ public class launch_ball : MonoBehaviour
 
         Debug.Log(string.Format("Shot accuracy: {0}\nShot power: {1}", shotAccuracy * 100, shotPower * 100));
 
-        // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         GameObject sphere = Instantiate(ball);
         sphere.transform.position = this.transform.position;
-        // sphere.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-        // sphere.transform.position = new Vector3(0, 1.5f, 0);
+
 
         Rigidbody gameObjectsRigidBody = sphere.AddComponent<Rigidbody>();
         gameObjectsRigidBody.mass = 1;
