@@ -11,6 +11,8 @@ public class SceneHandler : MonoBehaviour
 {
     public SteamVR_LaserPointer laserPointer;
 
+    AudioSource audioSource;
+
     public GameObject MainMenu;
     public GameObject CalibrationMenu;
     public GameObject PlayMenu;
@@ -30,6 +32,9 @@ public class SceneHandler : MonoBehaviour
         MainMenu.SetActive(true);
         CalibrationMenu.SetActive(false);
         PlayMenu.SetActive(false);    
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
