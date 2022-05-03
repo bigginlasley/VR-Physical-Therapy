@@ -14,13 +14,14 @@ public class CanvasLogic : MonoBehaviour
 
     public void ExitCalibrationButton()
     {
+        Debug.Log("CanvasLogic: Exited Calibration");
         CalibrationMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
 
     public void EnterCalibrationButton()
     {
-        Debug.Log("Entered Calibration");
+        Debug.Log("CanvasLogic: Entered Calibration");
         MainMenu.SetActive(false);
         CalibrationMenu.SetActive(true);
     }
